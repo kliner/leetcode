@@ -13,12 +13,11 @@ class Solution(object):
         if not nums:
             return ''
         nums.sort(self.cp)
+        if nums[0] == 0:
+            return '0'
         nums = [str(a) for a in nums]
         s = "".join(nums)
-        while len(s) > 1 and s[0]=='0':
-            s = s[1:]
         return s
-
         
         
 if __name__ == '__main__':
