@@ -5,22 +5,44 @@ class Solution(object):
         :type target: int
         :rtype: List[str]
         """
+
+        self.ans = []
         
-    def getAllResult(self, num):
-        if len(num) == 1:
-            return [ord(num)-0x30]
-        if num in self.dct:
-            return self.dct[num]
-        ans = set([])
-        for i in xrange(1, len(num)-1):
-            left = self.getAllResult(num[:i])
-            right = self.getAllResult(num[i+1:])
-            for l in left:
-                for r in right:
-                    ans.add(l+r)
-                    ans.add(l*r)
-                    ans.add(l-r)
-        self.dct[num] = ans
-        return ans
+        def calc(idx, cur, pre, path):
+            if idx == len(num):
+                if cur + pre == target:
+                    self.ans.append("".join(map(str, path)))
+                return
+            n = 0
+            for i in xrange(idx, len(num)):
+                n *= 10
+                n += ord(num[i])-0x30
+                path += ['+', n]
+                calc(i+1, cur + pre, n, path)
+                path.pop()
+                path.pop()
+                path += ['-', n]
+                calc(i+1, cur + pre, -n, path)
+                path.pop()
+                path.pop()
+                path += ['*', n]
+                calc(i+1, cur, pre*n, path)
+                path.pop()
+                path.pop()
+                if num[idx] == '0':
+                    break
 
-
+        n = 0
+        for i in xrange(len(num)):
+            n *= 10
+            n += ord(num[i])-0x30
+            calc(i+1, 0, n, [n])
+            if num[0] == '0':
+                break
+        return self.ans
+                
+test = Solution()
+print test.addOperators('123', 6)
+print test.addOperators('023', 6)
+print test.addOperators('00', 0)
+print test.addOperators('10009', 9)
