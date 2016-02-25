@@ -30,3 +30,4 @@ print test.numWays(2,2) == 4
 print test.numWays(3,2) == 6
 print test.numWays(2,3) == 9
 print test.numWays(3,3) == 24
+print test.numWays(14,2)

@@ -13,7 +13,6 @@ class Solution(object):
                 arr.append((i, 1))
             elif words[i] == word2:
                 arr.append((i, 2))
-        print arr
         lasti, lastj = arr[0]
         ans = 1e10
         for i, j in arr[1:]:
