@@ -28,3 +28,4 @@ if __name__ == '__main__':
     test = Solution()
     print test.coinChange([1,3,4,5], 7)
     print test.coinChange([112,149,215,496,482,436,144,397,500,189],8480)
+    print test.coinChange([137,38,18,497,97,462,400,119,479,416], 4605)
